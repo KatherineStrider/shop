@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Shopping list</string>
+
+    <string-array name="list_test">
+        <item>Хлеб</item>
+        <item>Молоко</item>
+        <item>Сосиски</item>
+        <item>Масло</item>
+        <item>Шампунь</item>
+    </string-array>
+
+    <string-array name="count_test">
+        <item>1 шт</item>
+        <item>1 л</item>
+        <item>6 шт</item>
+        <item>2 шт</item>
+        <item>1 шт</item>
+    </string-array>
+</resources>
