@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:background="@color/colorNewItem"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:fillViewport="true">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="vertical">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Наименование"
-            android:textSize="14sp" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:hint="Категория" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:hint="Важность" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:background="@color/colorNewItem"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1000dp"
+        android:minHeight="250dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
 
             <EditText
+                style="@style/editTexts"
+                android:hint="Наименование" />
+
+            <EditText
+                style="@style/editTexts"
+                android:hint="Категория" />
+
+            <EditText
+                style="@style/editTexts"
+                android:hint="Важность" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="Кол-во" />
+                android:orientation="horizontal">
 
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <EditText
+                    style="@style/editTexts"
+                    android:hint="Кол-во" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
         </LinearLayout>
 
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:text="Ok"
+            android:layout_weight="1" />
     </LinearLayout>
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:text="Ok"
-        android:layout_weight="1" />
-</LinearLayout>
+</ScrollView>
