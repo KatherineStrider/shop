@@ -84,7 +84,7 @@ public class DBShopList extends DBSQLite {
         return App.getDB().getReadableDatabase().rawQuery(SQLQuery, null);
     }
 
-    public long addDep(String name) {
+    public long addCategory(String name) {
 
         ContentValues v = new ContentValues();
 
@@ -94,7 +94,7 @@ public class DBShopList extends DBSQLite {
 
     }
 
-    public boolean updateDep(String name, String location, long id) {
+    public boolean updateCategory(String name, long id) {
 
         ContentValues v = new ContentValues();
 
@@ -104,37 +104,48 @@ public class DBShopList extends DBSQLite {
                 SQL_WHERE_BY_ID, new String[] {String.valueOf(id)});
     }
 
-    public boolean deleteDep(long id) {
+    public boolean deleteCategory(long id) {
         return 1 == this.getWritableDatabase().delete(
                 TableCategories.T_NAME, SQL_WHERE_BY_ID,
                 new String[] {String.valueOf(id)});
     }
 
-    public long addEmpl(String name, String info, long dep_id) {
+    public long getCategoryIdByName(String name){
+        Cursor c = this.getReadableDatabase().rawQuery("SELECT " + TableCategories._ID +
+                " FROM " + TableCategories.T_NAME +
+                " WHERE " + TableCategories.C_CATEGORY + " LIKE '" + name + "'", null);
+
+        if(!c.moveToFirst()){return 0;}
+        long i = c.getLong(c.getColumnIndex(TableCategories._ID));
+        c.close();
+        return i;
+    }
+
+    public long addItem(String name, int quantity, long category_id) {
 
         ContentValues v = new ContentValues();
 
         v.put(TableItems.C_NAME, name);
-        v.put(TableItems.C_QUANTITY, info);
-        v.put(TableItems.C_CATEGORY_ID, dep_id);
+        v.put(TableItems.C_QUANTITY, quantity);
+        v.put(TableItems.C_CATEGORY_ID, category_id);
 
         return this.getWritableDatabase().insert(TableItems.T_NAME, null, v);
 
     }
 
-    public boolean updateEmpl(String name, String info, long dep_id, long id) {
+    public boolean updateItem(String name, int quantity, long category_id, long id) {
 
         ContentValues v = new ContentValues();
 
         v.put(TableItems.C_NAME, name);
-        v.put(TableItems.C_QUANTITY, info);
-        v.put(TableItems.C_CATEGORY_ID, dep_id);
+        v.put(TableItems.C_QUANTITY, quantity);
+        v.put(TableItems.C_CATEGORY_ID, category_id);
 
         return 1 == this.getWritableDatabase().update(TableItems.T_NAME, v,
                 SQL_WHERE_BY_ID, new String[] {String.valueOf(id)});
     }
 
-    public boolean deleteEmpl(long id) {
+    public boolean deleteItem(long id) {
         return 1 == this.getWritableDatabase().delete(
                 TableItems.T_NAME, SQL_WHERE_BY_ID,
                 new String[] {String.valueOf(id)});
@@ -150,7 +161,7 @@ public class DBShopList extends DBSQLite {
         public static final String SQL_CREATE = "CREATE TABLE " + T_NAME +
                 " (" + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 C_NAME + " TEXT," +
-                C_QUANTITY + " TEXT," +
+                C_QUANTITY + " INTEGER," +
                 C_CATEGORY_ID + " INTEGER," +
                 "FOREIGN KEY ("+C_CATEGORY_ID+") REFERENCES "+ TableCategories.T_NAME+" ("+ TableCategories._ID+")"
                 + ")";

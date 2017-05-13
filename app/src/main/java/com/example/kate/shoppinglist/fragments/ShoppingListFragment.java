@@ -11,15 +11,17 @@ import android.widget.ListView;
 
 import com.example.kate.shoppinglist.App;
 import com.example.kate.shoppinglist.R;
+import com.example.kate.shoppinglist.RefreshList;
 import com.example.kate.shoppinglist.SQLite.DBShopList;
 
 /**
  * Created by Kate on 09.05.2017.
  */
 
-public class ShoppingListFragment extends ListFragment {
+public class ShoppingListFragment extends ListFragment implements RefreshList {
 
     public static final String TAG = ListFragment.class.getSimpleName();
+    SimpleCursorAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,8 +40,10 @@ public class ShoppingListFragment extends ListFragment {
 
         int[] to = {R.id.textItem, R.id.textCount, R.id.textCategory};
 
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this.getContext(),
+        adapter = new SimpleCursorAdapter(this.getContext(),
                 R.layout.view_shop_list,c, from, to, 1);
+
+        adapter.notifyDataSetChanged();
 
         setListAdapter(adapter);
     }
@@ -62,5 +66,10 @@ public class ShoppingListFragment extends ListFragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void refresh() {
+        adapter.changeCursor(App.getDB().getCursorForLinkedDBs());
     }
 }

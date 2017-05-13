@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.example.kate.shoppinglist.fragments.NewShoppingItem;
 import com.example.kate.shoppinglist.fragments.ShoppingListFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewItemClickListener {
 
     ShoppingListFragment fragmentList;
     NewShoppingItem fragmentItem;
@@ -29,5 +29,10 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.newItem, fragmentItem, NewShoppingItem.TAG)
                 .addToBackStack(NewShoppingItem.TAG)
                 .commit();
+    }
+
+    @Override
+    public void onItemClick() {
+        fragmentList.refresh();
     }
 }
