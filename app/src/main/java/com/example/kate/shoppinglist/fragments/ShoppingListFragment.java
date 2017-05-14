@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.example.kate.shoppinglist.App;
 import com.example.kate.shoppinglist.R;
-import com.example.kate.shoppinglist.RefreshList;
+import com.example.kate.shoppinglist.interfaces.RefreshList;
 import com.example.kate.shoppinglist.SQLite.DBShopList;
 
 /**
@@ -50,7 +50,9 @@ public class ShoppingListFragment extends ListFragment implements RefreshList {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+
+        App.getDB().deleteItem(id);
+        refresh();
     }
 
 

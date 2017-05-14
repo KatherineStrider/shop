@@ -1,4 +1,4 @@
-package com.example.kate.shoppinglist;
+package com.example.kate.shoppinglist.interfaces;
 
 /**
  * Created by Kate on 14.05.2017.

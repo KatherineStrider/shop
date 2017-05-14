@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Shopping list</string>
+    <string name="itemName">Наименование</string>
+    <string name="itemCategory">Категория</string>
+    <string name="itemPriority">Важность</string>
+    <string name="itemQuantity">Кол-во</string>
+    <string name="ok">Hide</string>
+    <string name="showFragment">Show</string>
 
     <string-array name="list_test">
         <item>Хлеб-1-1</item>

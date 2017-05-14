@@ -110,6 +110,16 @@ public class DBShopList extends DBSQLite {
                 new String[] {String.valueOf(id)});
     }
 
+    public boolean findCategoryByName(String name){
+        Cursor c = this.getReadableDatabase().rawQuery("SELECT " + TableCategories._ID +
+                " FROM " + TableCategories.T_NAME +
+                " WHERE " + TableCategories.C_CATEGORY + " LIKE '" + name + "'", null);
+        if(!c.moveToFirst()){return false;}
+        c.close();
+        return true;
+
+    }
+
     public long getCategoryIdByName(String name){
         Cursor c = this.getReadableDatabase().rawQuery("SELECT " + TableCategories._ID +
                 " FROM " + TableCategories.T_NAME +
