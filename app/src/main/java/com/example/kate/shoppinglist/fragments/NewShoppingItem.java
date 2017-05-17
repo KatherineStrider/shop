@@ -77,12 +77,12 @@ public class NewShoppingItem extends Fragment {
                     values.put(DBShopList.TableCategories.C_CATEGORY, etCategory.getText().toString());
                     getContext().getContentResolver().insert(DBShopListProvider.CONTENT_URI_CATEGORIES, values);
 
-                    values.clear();
+                    ContentValues val = new ContentValues();
 
-                    values.put(DBShopList.TableItems.C_NAME, eTName.getText().toString());
-                    values.put(DBShopList.TableItems.C_QUANTITY, i);
-                    values.put(DBShopList.TableItems.C_CATEGORY_ID, eTName.getText().toString());
-                    getContext().getContentResolver().insert(DBShopListProvider.CONTENT_URI_ITEMS, values);
+                    val.put(DBShopList.TableItems.C_NAME, eTName.getText().toString());
+                    val.put(DBShopList.TableItems.C_QUANTITY, i);
+                    val.put(DBShopList.TableItems.C_CATEGORY_ID, etCategory.getText().toString());
+                    getContext().getContentResolver().insert(DBShopListProvider.CONTENT_URI_ITEMS, val);
 
                     eTName.setText("");
                     etCategory.setText("");

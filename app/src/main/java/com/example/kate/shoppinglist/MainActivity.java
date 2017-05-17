@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NewItemClickListe
     @Override
     public void showFragment() {
 
-        buttonFragment = ButtonFragment.getInstance();
+//        fragmentList = ShoppingListFragment.getInstance();
 
         getSupportFragmentManager()
                 .beginTransaction()

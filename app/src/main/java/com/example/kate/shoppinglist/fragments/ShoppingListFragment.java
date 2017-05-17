@@ -11,9 +11,9 @@ import android.widget.ListView;
 
 import com.example.kate.shoppinglist.App;
 import com.example.kate.shoppinglist.R;
-import com.example.kate.shoppinglist.sqlite.DBShopListProvider;
 import com.example.kate.shoppinglist.interfaces.RefreshList;
 import com.example.kate.shoppinglist.sqlite.DBShopList;
+import com.example.kate.shoppinglist.sqlite.DBShopListProvider;
 
 /**
  * Created by Kate on 09.05.2017.
