@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.example.kate.shoppinglist.sqlite.DBShopList"
+            android:name="com.example.kate.shoppinglist.sqlite.DBShopListProvider"/>
     </application>
 
 </manifest>

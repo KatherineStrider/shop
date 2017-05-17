@@ -1,5 +1,6 @@
 package com.example.kate.shoppinglist.fragments;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.kate.shoppinglist.App;
+import com.example.kate.shoppinglist.R;
 import com.example.kate.shoppinglist.interfaces.ChangeFragment;
 import com.example.kate.shoppinglist.interfaces.NewItemClickListener;
-import com.example.kate.shoppinglist.R;
+import com.example.kate.shoppinglist.sqlite.DBShopList;
+import com.example.kate.shoppinglist.sqlite.DBShopListProvider;
 
 /**
  * Created by Kate on 09.05.2017.
@@ -71,14 +73,16 @@ public class NewShoppingItem extends Fragment {
                     } catch (NumberFormatException e) {
                         return;
                     }
+                    ContentValues values = new ContentValues();
+                    values.put(DBShopList.TableCategories.C_CATEGORY, etCategory.getText().toString());
+                    getContext().getContentResolver().insert(DBShopListProvider.CONTENT_URI_CATEGORIES, values);
 
-                    if (!App.getDB().findCategoryByName(etCategory.getText().toString())) {
-                        App.getDB().addCategory(etCategory.getText().toString());
-                    }
+                    values.clear();
 
-                    App.getDB().addItem(eTName.getText().toString(),
-                            i,
-                            App.getDB().getCategoryIdByName(etCategory.getText().toString()));
+                    values.put(DBShopList.TableItems.C_NAME, eTName.getText().toString());
+                    values.put(DBShopList.TableItems.C_QUANTITY, i);
+                    values.put(DBShopList.TableItems.C_CATEGORY_ID, eTName.getText().toString());
+                    getContext().getContentResolver().insert(DBShopListProvider.CONTENT_URI_ITEMS, values);
 
                     eTName.setText("");
                     etCategory.setText("");

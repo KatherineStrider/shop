@@ -3,7 +3,7 @@ package com.example.kate.shoppinglist;
 import android.app.Application;
 import android.util.Log;
 
-import com.example.kate.shoppinglist.SQLite.DBShopList;
+import com.example.kate.shoppinglist.sqlite.DBShopList;
 
 /**
  * Created by Kate on 12.05.2017.

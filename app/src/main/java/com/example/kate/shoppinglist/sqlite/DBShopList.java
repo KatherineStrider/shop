@@ -1,4 +1,4 @@
-package com.example.kate.shoppinglist.SQLite;
+package com.example.kate.shoppinglist.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -94,6 +94,10 @@ public class DBShopList extends DBSQLite {
 
     }
 
+    public long addCategory(ContentValues values) {
+        return this.getWritableDatabase().insert(TableCategories.T_NAME, null, values);
+    }
+
     public boolean updateCategory(String name, long id) {
 
         ContentValues v = new ContentValues();
@@ -141,6 +145,10 @@ public class DBShopList extends DBSQLite {
 
         return this.getWritableDatabase().insert(TableItems.T_NAME, null, v);
 
+    }
+
+    public long addItem(ContentValues values) {
+        return this.getWritableDatabase().insert(TableItems.T_NAME, null, values);
     }
 
     public boolean updateItem(String name, int quantity, long category_id, long id) {

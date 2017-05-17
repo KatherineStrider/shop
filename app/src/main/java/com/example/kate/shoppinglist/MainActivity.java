@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NewItemClickListe
     public void showFragment() {
 
         buttonFragment = ButtonFragment.getInstance();
-        
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.newItem, fragmentItem, NewShoppingItem.TAG)

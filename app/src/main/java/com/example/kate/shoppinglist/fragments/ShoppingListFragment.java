@@ -11,8 +11,9 @@ import android.widget.ListView;
 
 import com.example.kate.shoppinglist.App;
 import com.example.kate.shoppinglist.R;
+import com.example.kate.shoppinglist.sqlite.DBShopListProvider;
 import com.example.kate.shoppinglist.interfaces.RefreshList;
-import com.example.kate.shoppinglist.SQLite.DBShopList;
+import com.example.kate.shoppinglist.sqlite.DBShopList;
 
 /**
  * Created by Kate on 09.05.2017.
@@ -32,7 +33,8 @@ public class ShoppingListFragment extends ListFragment implements RefreshList {
 //                .getStringArray(R.array.count_test));
 //        setListAdapter(listViewAdapter);
 
-        Cursor c = App.getDB().getCursorForLinkedDBs();
+        Cursor c = getContext().getContentResolver().query(DBShopListProvider.CONTENT_URI_ITEMS,
+                null, null, null, null);
 
         String[] from = {DBShopList.TableItems.C_NAME,
                 DBShopList.TableItems.C_QUANTITY,
@@ -42,8 +44,6 @@ public class ShoppingListFragment extends ListFragment implements RefreshList {
 
         adapter = new SimpleCursorAdapter(this.getContext(),
                 R.layout.view_shop_list,c, from, to, 1);
-
-        adapter.notifyDataSetChanged();
 
         setListAdapter(adapter);
     }
@@ -72,6 +72,9 @@ public class ShoppingListFragment extends ListFragment implements RefreshList {
 
     @Override
     public void refresh() {
-        adapter.changeCursor(App.getDB().getCursorForLinkedDBs());
+
+        Cursor c = getContext().getContentResolver().query(DBShopListProvider.CONTENT_URI_ITEMS,
+                null, null, null, null);
+        adapter.changeCursor(c);
     }
 }

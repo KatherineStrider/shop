@@ -1,4 +1,4 @@
-package com.example.kate.shoppinglist.SQLite;
+package com.example.kate.shoppinglist.sqlite;
 
 import android.content.Context;
 import android.database.Cursor;
