@@ -84,7 +84,7 @@ public class DBShopListProvider extends ContentProvider {
 
         Uri resultUri = null;
 
-        if (uriMatcher.match(uri) == DB_ITEMS){
+        if (uriMatcher.match(uri) == DB_ITEMS) {
 
             long l = dbShop.getCategoryIdByName(values.get(DBShopList.TableItems.C_CATEGORY_ID).toString());
 
@@ -93,27 +93,23 @@ public class DBShopListProvider extends ContentProvider {
             long id = dbShop.addItem(values);
 
             if (id > 0) {
-                Uri itemUri = ContentUris.withAppendedId(CONTENT_URI_ITEM, id);
+                Uri itemUri = ContentUris.withAppendedId(CONTENT_URI_ITEMS, id);
 //                getContext().getContentResolver().notifyChange(itemUri, null);
-                resultUri =  itemUri;
+                resultUri = itemUri;
             }
 
-        }
-
-        else if(uriMatcher.match(uri) == DB_CATEGORIES){
+        } else if (uriMatcher.match(uri) == DB_CATEGORIES) {
 
             if (!dbShop.findCategoryByName(values.get(DBShopList.TableCategories.C_CATEGORY).toString())) {
                 long id = dbShop.addCategory(values);
 
                 if (id > 0) {
-                    Uri itemUri = ContentUris.withAppendedId(CONTENT_URI_CATEGORY, id);
+                    Uri itemUri = ContentUris.withAppendedId(CONTENT_URI_CATEGORIES, id);
 //                    getContext().getContentResolver().notifyChange(itemUri, null);
-                    resultUri =  itemUri;
+                    resultUri = itemUri;
                 }
             }
-        }
-
-        else {
+        } else {
             throw new IllegalArgumentException("Unknow URI " + uri);
         }
         return resultUri;
@@ -121,11 +117,62 @@ public class DBShopListProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+
+
+        if (uriMatcher.match(uri) == DB_ITEM) {
+
+            long id = ContentUris.parseId(uri);
+
+            boolean result = dbShop.deleteItem(id);
+
+            if (result) {
+                return 1;
+            }
+
+        } else if (uriMatcher.match(uri) == DB_CATEGORY) {
+
+            long id = ContentUris.parseId(uri);
+
+            boolean result = dbShop.deleteCategory(id);
+
+            if (result) {
+                return 1;
+            }
+        } else {
+            throw new IllegalArgumentException("Unknow URI " + uri);
+        }
+
         return 0;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+
+        if (uriMatcher.match(uri) == DB_ITEM) {
+
+
+            long id = ContentUris.parseId(uri);
+
+            boolean result = dbShop.updateItem(values, id);
+
+            if (result) {
+                return 1;
+            }
+
+        } else if (uriMatcher.match(uri) == DB_CATEGORY) {
+
+            long id = ContentUris.parseId(uri);
+
+            boolean result = dbShop.updateCategory(values, id);
+
+            if (result) {
+                return 1;
+            }
+
+        } else {
+            throw new IllegalArgumentException("Unknow URI " + uri);
+        }
+
         return 0;
     }
 }

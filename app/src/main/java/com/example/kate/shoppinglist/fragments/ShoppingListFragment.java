@@ -1,7 +1,9 @@
 package com.example.kate.shoppinglist.fragments;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
@@ -9,7 +11,6 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.widget.ListView;
 
-import com.example.kate.shoppinglist.App;
 import com.example.kate.shoppinglist.R;
 import com.example.kate.shoppinglist.interfaces.RefreshList;
 import com.example.kate.shoppinglist.sqlite.DBShopList;
@@ -50,8 +51,8 @@ public class ShoppingListFragment extends ListFragment implements RefreshList {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
-        App.getDB().deleteItem(id);
+        Uri itemUri = ContentUris.withAppendedId(DBShopListProvider.CONTENT_URI_ITEM, id);
+        getContext().getContentResolver().delete(itemUri, null, null);
         refresh();
     }
 

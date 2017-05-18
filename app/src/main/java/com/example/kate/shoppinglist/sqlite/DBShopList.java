@@ -108,6 +108,12 @@ public class DBShopList extends DBSQLite {
                 SQL_WHERE_BY_ID, new String[] {String.valueOf(id)});
     }
 
+    public boolean updateCategory(ContentValues values, long id) {
+
+        return 1 == this.getWritableDatabase().update(TableCategories.T_NAME, values,
+                SQL_WHERE_BY_ID, new String[] {String.valueOf(id)});
+    }
+
     public boolean deleteCategory(long id) {
         return 1 == this.getWritableDatabase().delete(
                 TableCategories.T_NAME, SQL_WHERE_BY_ID,
@@ -160,6 +166,12 @@ public class DBShopList extends DBSQLite {
         v.put(TableItems.C_CATEGORY_ID, category_id);
 
         return 1 == this.getWritableDatabase().update(TableItems.T_NAME, v,
+                SQL_WHERE_BY_ID, new String[] {String.valueOf(id)});
+    }
+
+    public boolean updateItem(ContentValues values, long id) {
+
+        return 1 == this.getWritableDatabase().update(TableItems.T_NAME, values,
                 SQL_WHERE_BY_ID, new String[] {String.valueOf(id)});
     }
 
